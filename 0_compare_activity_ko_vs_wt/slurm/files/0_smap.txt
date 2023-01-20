@@ -1,0 +1,1 @@
+/data5/deepro/starrseq/papers/reproducibility/1_data_download/in_house/meta_data/metadata.json input /data5/deepro/starrseq/papers/reproducibility/3_read_lib_qc/data/in_house/cov /data5/deepro/starrseq/papers/results/0_compare_activity_ko_vs_wt/data
