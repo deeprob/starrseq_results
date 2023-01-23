@@ -54,9 +54,11 @@ def read_and_extract_coverage(cov_bed):
     roi_depth = df.iloc[:, -4]
     return roi_depth
 
+
 def get_bam_file_reads(bam_file):
     reads = pysam.view("-c", bam_file)
     return int(reads.strip())
+
 
 def get_bed_annotations_helper(read_df, peak_file):
     # read the dataframe as a bed file
@@ -67,6 +69,7 @@ def get_bed_annotations_helper(read_df, peak_file):
     intersect_df = roi_bed.intersect(peak_bed, c=True, f=0.95).to_dataframe(disable_auto_names=True, header=None)
     return (intersect_df.iloc[:, -1]>0).astype(int)
 
+
 def get_bed_annotations(read_df, bed_files, libraries, bed_type):
     bed_iter = [(read_df, pf) for pf in bed_files]
     intersect_dfs = list(itertools.starmap(get_bed_annotations_helper, bed_iter))
@@ -75,10 +78,12 @@ def get_bed_annotations(read_df, bed_files, libraries, bed_type):
     read_df_with_annots = pd.concat((read_df, intersect_df_meta), axis=1)
     return read_df_with_annots
 
+
 def read_diff_output(diff_act_filename, libname):
     df = pd.read_csv(diff_act_filename)
     df.columns = [f"{libname}_{c}" for c in df.columns]
     return df
+
 
 def get_meta_activity_map(meta_file, all_lib_names, fragment_depth_dir, filtered_bam_dir, peak_dir, diff_act_dir):
     # get required file paths
@@ -123,15 +128,74 @@ def get_meta_activity_map(meta_file, all_lib_names, fragment_depth_dir, filtered
     return read_df_fold_change_with_annots
 
 
-#################
-# diff act file #
-#################
+########################
+# fragment annotations #
+########################
 
-def save_diff_act_file(df, store_dir, libn, activity_type):
-    # save csv file
-    save_file = get_diff_act_store_file(store_dir, libn, activity_type, "csv")
-    os.makedirs(os.path.dirname(save_file), exist_ok=True)
-    df.to_csv(save_file, index=False)
+def save_file_in_homer_format(df, libn, savefile, control=False):
+    # drop duplicates
+    df = df.drop_duplicates(keep="first")
+    # split the merged coordinates to bed format
+    df = pd.concat((df, df.chrom_coord.str.split("_", expand=True).rename(columns={0: "chrom", 1: "start", 2: "end"})), axis=1)
+    # add strand info
+    df["strand"] = "."
+    if control:
+        df = df.loc[:, ["chrom", "start", "end", "chrom_coord", f"{libn}", "strand"]]
+    else:
+        df = df.loc[:, ["chrom", "start", "end", "chrom_coord", f"{libn}", "strand", f"{libn}_log2FoldChange", f"{libn}_baseMean", f"{libn}_lfcSE", f"{libn}_pvalue", f"{libn}_padj"]]
+    # save to bed format
+    df.to_csv(savefile, sep="\t", header=False, index=False)
+    return
+
+
+def save_peaks_notpeaks(meta_df, libn, store_dir, control_flag):
+    peaks = meta_df.loc[(meta_df[libn]>0)&(meta_df[f"{libn}_peak"]==1)]
+    notpeaks = meta_df.loc[meta_df[f"{libn}_peak"]==0]
+    
+    peak_save_file = os.path.join(store_dir, libn, "peaks.bed")
+    nonpeak_save_file = os.path.join(store_dir, libn, "notpeaks.bed")
+    os.makedirs(os.path.join(store_dir, libn), exist_ok=True)
+
+    save_file_in_homer_format(peaks, libn, peak_save_file, control=control_flag)
+    save_file_in_homer_format(notpeaks, libn, nonpeak_save_file, control=control_flag)
+    return
+
+
+def save_diff_act(meta_df, libn, store_dir):
+    # induced fragments :: log2FoldChange>0; padj<0.01 
+    induced = meta_df.loc[(meta_df[f"{libn}_log2FoldChange"]>0)&(meta_df[f"{libn}_padj"]<0.01)]
+    # repressed fragments :: log2FoldChange<0; padj<0.01 
+    repressed = meta_df.loc[(meta_df[f"{libn}_log2FoldChange"]<0)&(meta_df[f"{libn}_padj"]<0.01)]
+    # responsive fragments consist of both induced and repressed fragments
+    responsive = pd.concat([induced, repressed], axis=0)
+    # non-responsive fragments :: anything that is not responsive 
+    nonresponsive = meta_df.loc[~((meta_df[f"{libn}_log2FoldChange"]>0)&(meta_df[f"{libn}_padj"]<0.01)|(meta_df[f"{libn}_log2FoldChange"]<0)&(meta_df[f"{libn}_padj"]<0.01))]
+    
+    assert len(meta_df) == sum(list(map(len, [induced, repressed, nonresponsive])))
+
+    induced_save_file = os.path.join(store_dir, libn, "induced.bed")
+    repressed_save_file = os.path.join(store_dir, libn, "repressed.bed")
+    responsive_save_file = os.path.join(store_dir, libn, "responsive.bed")
+    nonresponsive_save_file = os.path.join(store_dir, libn, "nonresponsive.bed")
+
+    save_file_in_homer_format(induced, libn, induced_save_file)
+    save_file_in_homer_format(repressed, libn, repressed_save_file)
+    save_file_in_homer_format(responsive, libn, responsive_save_file)
+    save_file_in_homer_format(nonresponsive, libn, nonresponsive_save_file)
+    return
+
+
+def save_always_active_inactive(meta_df, all_lib_names, store_dir):
+    always_active_expr = " & ".join([f"(`{ln}_peak` == 1)" for ln in all_lib_names])
+    always_inactive_expr = " & ".join([f"(`{ln}` < 0.2) & (`{ln}` > -0.2)" for ln in all_lib_names])
+    always_active = meta_df.query(always_active_expr)
+    always_inactive = meta_df.query(always_inactive_expr)
+
+    active_save_file = os.path.join(store_dir, "active.bed")
+    inactive_save_file = os.path.join(store_dir, "inactive.bed")
+    
+    save_file_in_homer_format(always_active, "control", active_save_file, control=True)
+    save_file_in_homer_format(always_inactive, "control", inactive_save_file, control=True)
     return
 
 

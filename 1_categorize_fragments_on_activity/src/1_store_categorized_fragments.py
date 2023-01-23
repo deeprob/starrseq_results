@@ -7,17 +7,12 @@ import pandas as pd
 def save_categorized_fragments(meta_activity_map_file, all_lib_names, store_dir):
     meta_df = pd.read_csv(meta_activity_map_file)
     for libn in all_lib_names:
-        
-        meta_df[f"{libn}_padj"] = meta_df[f"{libn}_padj"].fillna(1.)
-        # induced fragments :: ko rpp activity > 0; log2FoldChange>0; padj<0.01 
-        induced = meta_df.loc[(meta_df[libn]>0)&(meta_df[f"{libn}_log2FoldChange"]>0)&(meta_df[f"{libn}_padj"]<0.01)]
-        ut.save_diff_act_file(induced, store_dir, libn, "induced")
-        # repressed fragments :: control rpp activity > 0; log2FoldChange<0; padj<0.01 
-        repressed = meta_df.loc[(meta_df["control"]>0)&(meta_df[f"{libn}_log2FoldChange"]<0)&(meta_df[f"{libn}_padj"]<0.01)]
-        ut.save_diff_act_file(repressed, store_dir, libn, "repressed")
-        # non-responsive fragments :: control or ko rpp activity > 0; padj>0.01 
-        nonresponsive = meta_df.loc[((meta_df["control"]>0)|(meta_df[libn]>0))&(meta_df[f"{libn}_padj"]>0.01)]
-        ut.save_diff_act_file(nonresponsive, store_dir, libn, "nonresponsive")
+        if libn == "control":
+            ut.save_peaks_notpeaks(meta_df, libn, store_dir, True)        
+        else:
+            ut.save_peaks_notpeaks(meta_df, libn, store_dir, False)
+            ut.save_diff_act(meta_df, libn, store_dir)
+    ut.save_always_active_inactive(meta_df, all_lib_names, store_dir)
     return
 
 
