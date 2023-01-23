@@ -6,13 +6,14 @@ library(DESeq2)
 # get the counts file
 args = commandArgs(trailingOnly=TRUE)
 # check to see that two argument is given
-if (length(args)!=3) {
-  stop("Three arguments must be supplied (input file).n", call.=FALSE)
+if (length(args)!=4) {
+  stop("Four arguments must be supplied (input file).n", call.=FALSE)
 }
 
 infilename = args[1]
 designmatfilename = args[2]
 outfilename = args[3]
+contraststr = args[4]
 
 # read count file
 tabla <- read.table(infilename, sep=",", row.names=1, header=TRUE)
@@ -30,7 +31,8 @@ dds <- DESeqDataSetFromMatrix(countData = tabla,
 dds <- DESeq(dds)
 
 # get the results
-res <- results(dds)
+contrast_vec = unlist(strsplit(contraststr, ","))
+res <- results(dds, contrast=contrast_vec)
 
 # save to file .. 
 write.table(res, file=outfilename, sep=",", row.names=TRUE, col.names=TRUE)

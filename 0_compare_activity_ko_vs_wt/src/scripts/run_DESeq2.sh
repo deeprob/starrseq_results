@@ -23,6 +23,7 @@ conda activate starrseq-da
 infile=$1
 designmat=$2
 outfile=$3
+contrast=$4
 echo $PWD
 
-Rscript /data5/deepro/starrseq/papers/results/0_compare_activity_ko_vs_wt/src/scripts/deseq2.R $infile $designmat $outfile
+Rscript /data5/deepro/starrseq/papers/results/0_compare_activity_ko_vs_wt/src/scripts/deseq2.R $infile $designmat $outfile $contrast

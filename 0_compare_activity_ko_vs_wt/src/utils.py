@@ -153,33 +153,12 @@ def get_deseq_out_file(store_dir, lib_short):
     os.makedirs(os.path.dirname(save_file), exist_ok=True)
     return save_file
 
-def da_with_deseq(table_in, design_mat_in, table_out):
+def da_with_deseq(table_in, design_mat_in, table_out, contrast):
     cmd = [
         "bash", f"{CURRENT_DIR_PATH}/scripts/run_DESeq2.sh", 
-        table_in, design_mat_in, table_out
+        table_in, design_mat_in, table_out, contrast
         ]
     subprocess.run(cmd)
-    return
-
-def save_deseq_diff_activity_file(deseq_outfile, store_dir, lib_short):
-    df = pd.read_csv(deseq_outfile).reset_index().rename(columns={"index": "unique_id"})
-    df = pd.concat((df, df.unique_id.str.split("_", expand=True).rename(columns={0: "chrom", 1: "start", 2: "end"})), axis=1)
-    df["strand"] = "."
-    df = df.loc[:, ["chrom", "start", "end", "unique_id", "stat", "strand", "log2FoldChange", "baseMean", "lfcSE", "pvalue", "padj"]]
-
-    df_induced = df.loc[((df.log2FoldChange>0) & (df.padj<0.01))]
-    df_repressed = df.loc[((df.log2FoldChange<0) & (df.padj<0.01))]
-    df_nonresponsive = df.loc[~(((df.log2FoldChange>0) & (df.padj<0.01)) | ((df.log2FoldChange<0) & (df.padj<0.01)))]
-
-    assert len(df) == sum(list(map(len, [df_induced, df_repressed, df_nonresponsive])))
-
-    induced_file = os.path.join(store_dir, lib_short, "induced.bed")
-    repressed_file = os.path.join(store_dir, lib_short, "repressed.bed")
-    nonresponsive_file = os.path.join(store_dir, lib_short, "nonresponsive.bed")
-
-    df_induced.to_csv(induced_file, sep="\t", header=False, index=False)
-    df_repressed.to_csv(repressed_file, sep="\t", header=False, index=False)
-    df_nonresponsive.to_csv(nonresponsive_file, sep="\t", header=False, index=False)
     return
 
 def get_diff_active_fragments_deseq(
@@ -201,10 +180,11 @@ def get_diff_active_fragments_deseq(
     design_mat_file = save_design_matrix(combined_depth_df.columns, conditions, store_dir, lib_short)
     # get deseq out table
     deseq_out = get_deseq_out_file(store_dir, lib_short)
+    # create contrast
+    contrast = ",".join(["condition", lib_short, cc_short])
+    print(f"Regions with logFC > 0 are induced in {lib_short}.")
     # run deseq
-    da_with_deseq(deseq_in_file, design_mat_file, deseq_out)
-    # save induced, repressed and non responsive regions
-    save_deseq_diff_activity_file(deseq_out, store_dir, lib_short)
+    da_with_deseq(deseq_in_file, design_mat_file, deseq_out, contrast)
     return
 
 ################
