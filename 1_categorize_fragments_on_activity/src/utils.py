@@ -134,7 +134,7 @@ def get_meta_activity_map(meta_file, all_lib_names, fragment_depth_dir, filtered
 
 def save_file_in_homer_format(df, libn, savefile, control=False):
     # drop duplicates
-    df = df.drop_duplicates(keep="first")
+    df = df.fillna("NA").drop_duplicates(keep="first")
     # split the merged coordinates to bed format
     df = pd.concat((df, df.chrom_coord.str.split("_", expand=True).rename(columns={0: "chrom", 1: "start", 2: "end"})), axis=1)
     # add strand info
