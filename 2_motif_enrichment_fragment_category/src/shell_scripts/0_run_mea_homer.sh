@@ -7,4 +7,4 @@ background_region=$3
 output_dir=$4
 threads=$5
 
-findMotifsGenome.pl $region_file $reference_genome $output_dir -bg $background_region -p $threads -size given
+findMotifsGenome.pl $region_file $reference_genome $output_dir -bg $background_region -p $threads -size given -nomotif

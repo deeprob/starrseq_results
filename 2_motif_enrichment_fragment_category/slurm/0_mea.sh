@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=girirajan
 #SBATCH --partition=girirajan
-#SBATCH --job-name=starr_rqc
+#SBATCH --job-name=starr_mea
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --time=400:0:0
@@ -9,8 +9,9 @@
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/src
 #SBATCH -o /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/slurm/logs/0_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/slurm/logs/0_err_%a.log
-#SBATCH --exclude ramona,durga
-#SBATCH --array 31-60
+#SBATCH --exclude ramona
+#SBATCH --array 1-60%20
+#SBATCH --spread-job
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
