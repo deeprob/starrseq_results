@@ -1,15 +1,17 @@
 #!/bin/bash
 #SBATCH --account=girirajan
 #SBATCH --partition=girirajan
-#SBATCH --job-name=starr_act
+#SBATCH --job-name=starr_mea
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=8
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=20G
-#SBATCH --chdir /data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/src
-#SBATCH -o /data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/slurm/logs/1_out.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/slurm/logs/1_err.log
+#SBATCH --chdir /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/src
+#SBATCH -o /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/slurm/logs/1_out_%a.log
+#SBATCH -e /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/slurm/logs/1_err_%a.log
 #SBATCH --exclude ramona,durga
+#SBATCH --array 1-20
+#SBATCH --spread-job
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -30,9 +32,9 @@ conda activate starrseq
 
 echo `date` starting job on $HOSTNAME
 
-LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/slurm/files/1_smap.txt)
+LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/slurm/files/1_smap.txt)
 
 echo $LINE
-python /data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/src/1_store_categorized_fragments.py $LINE
+python /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/src/1_classify_fragments.py $LINE
 
 echo `date` ending job

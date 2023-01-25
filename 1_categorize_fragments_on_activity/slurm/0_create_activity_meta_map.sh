@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=girirajan
 #SBATCH --partition=girirajan
-#SBATCH --job-name=starr_rqc
+#SBATCH --job-name=starr_act
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=400:0:0

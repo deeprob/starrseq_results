@@ -93,8 +93,10 @@ def get_meta_activity_map(meta_file, all_lib_names, fragment_depth_dir, filtered
     peak_file_libname = []
     diff_act_files = []
     diff_act_libname = []
+    all_lib_shorts = []
     for lib_name in all_lib_names:
         lib_args = create_args(meta_file, lib_name)
+        all_lib_shorts.append(lib_args.library_short)
         lib_depth_file = os.path.join(fragment_depth_dir, lib_args.library_short, f"{lib_args.library_prefix}.bed")
         lib_depth_files.append(lib_depth_file)
         bam_file = os.path.join(filtered_bam_dir, lib_args.library_short,  f"{lib_args.library_prefix}.bam")
@@ -102,24 +104,25 @@ def get_meta_activity_map(meta_file, all_lib_names, fragment_depth_dir, filtered
         peak_file = os.path.join(peak_dir, lib_args.library_short,  "starrpeaker", "peaks.peak.bed")
         diff_act_file = os.path.join(diff_act_dir, lib_args.library_short, "deseq_out.csv")
         if lib_name == "input":
-            pass
+            input_short = lib_args.library_short
         elif lib_name == "control":
+            control_short = lib_args.library_short
             peak_files.append(peak_file)
-            peak_file_libname.append(lib_name)
+            peak_file_libname.append(lib_args.library_short)
         else:
             peak_files.append(peak_file)
-            peak_file_libname.append(lib_name)
+            peak_file_libname.append(lib_args.library_short)
             diff_act_files.append(diff_act_file)
-            diff_act_libname.append(lib_name)
+            diff_act_libname.append(lib_args.library_short)
     # create the rpm normalized rpp dataframe
     read_df = pd.concat(list(map(read_and_extract_coverage, lib_depth_files)), axis=1)
     read_df.index = list(map(lambda x: "_".join(list(map(str, x))) , read_df.index))
-    read_df.columns = all_lib_names
-    read_df = read_df.loc[read_df.input>150]
+    read_df.columns = all_lib_shorts 
+    read_df = read_df.loc[read_df[input_short]>150]
     bam_file_reads = run_singleargs_pool_job(get_bam_file_reads, bam_files) # list(map(get_bam_file_reads, bam_files))
     read_rpm_df = read_df.divide(bam_file_reads, axis=1)
     read_rpm_df = read_rpm_df * 1e6
-    read_df_fold_change = np.log2(read_rpm_df.divide(read_rpm_df.input, axis=0)).drop(columns="input").sort_values("control").reset_index().rename(columns={"index": "chrom_coord"})
+    read_df_fold_change = np.log2(read_rpm_df.divide(read_rpm_df[input_short], axis=0)).drop(columns=input_short).sort_values(control_short).reset_index().rename(columns={"index": "chrom_coord"})
     # add starrpeaker annotations
     read_df_fold_change_with_annots = get_bed_annotations(read_df_fold_change, peak_files, peak_file_libname, "peak")
     # add diff_activity information
@@ -185,17 +188,17 @@ def save_diff_act(meta_df, libn, store_dir):
     return
 
 
-def save_always_active_inactive(meta_df, all_lib_names, store_dir):
+def save_always_active_inactive(meta_df, libn, all_lib_names, store_dir):
     always_active_expr = " & ".join([f"(`{ln}_peak` == 1)" for ln in all_lib_names])
     always_inactive_expr = " & ".join([f"(`{ln}` < 0.2) & (`{ln}` > -0.2)" for ln in all_lib_names])
     always_active = meta_df.query(always_active_expr)
     always_inactive = meta_df.query(always_inactive_expr)
 
-    active_save_file = os.path.join(store_dir, "active.bed")
-    inactive_save_file = os.path.join(store_dir, "inactive.bed")
+    active_save_file = os.path.join(store_dir, libn, "active.bed")
+    inactive_save_file = os.path.join(store_dir, libn, "inactive.bed")
     
-    save_file_in_homer_format(always_active, "control", active_save_file, control=True)
-    save_file_in_homer_format(always_inactive, "control", inactive_save_file, control=True)
+    save_file_in_homer_format(always_active, libn, active_save_file, control=True)
+    save_file_in_homer_format(always_inactive, libn, inactive_save_file, control=True)
     return
 
 

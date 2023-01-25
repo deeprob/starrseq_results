@@ -7,12 +7,13 @@ import pandas as pd
 def save_categorized_fragments(meta_activity_map_file, all_lib_names, store_dir):
     meta_df = pd.read_csv(meta_activity_map_file)
     for libn in all_lib_names:
-        if libn == "control":
-            ut.save_peaks_notpeaks(meta_df, libn, store_dir, True)        
+        if libn == "CC":
+            ut.save_peaks_notpeaks(meta_df, libn, store_dir, True)   
+            ut.save_always_active_inactive(meta_df, libn, all_lib_names, store_dir)     
         else:
             ut.save_peaks_notpeaks(meta_df, libn, store_dir, False)
             ut.save_diff_act(meta_df, libn, store_dir)
-    ut.save_always_active_inactive(meta_df, all_lib_names, store_dir)
+
     return
 
 
