@@ -1,0 +1,70 @@
+{
+    "16p12.1": {
+        "prefix": "16P12_1",
+        "reps": "D1_R1_S19 D1_R2_S20 D1_R3_S21 D2_R1_S19 D2_R2_S20 D2_R3_S21 D3_R1_S19 D3_R2_S20 D3_R3_S21", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "16P12_1",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    }, 
+    "atf2": {
+        "prefix": "ATF2",
+        "reps": "D1_R1_S4 D1_R2_S5 D1_R3_S6 D2_R1_S4 D2_R2_S5 D2_R3_S6 D3_R1_S4 D3_R2_S5 D3_R3_S6", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "ATF2",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "control": {
+        "prefix": "CC",
+        "reps": "D1_R1_S22 D1_R2_S23 D1_R3_S24 D2_R1_S22 D2_R2_S23 D2_R3_S24 D3_R1_S22 D3_R2_S23 D3_R3_S24", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "CC",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "ctcf": {
+        "prefix": "CTCF",
+        "reps": "D1_R1_S7 D1_R2_S8 D1_R3_S9 D2_R1_S7 D2_R2_S8 D2_R3_S9 D3_R1_S7 D3_R2_S8 D3_R3_S9", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "CTCF",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "foxa1": {
+        "prefix": "FOXA1",
+        "reps": "D1_R1_S1 D1_R2_S2 D1_R3_S3 D2_R1_S1 D2_R2_S2 D2_R3_S3 D3_R1_S1 D3_R2_S2 D3_R3_S3", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "FOXA1",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "lef1": {
+        "prefix": "LEF1",
+        "reps": "D1_R1_S10 D1_R2_S11 D1_R3_S12 D2_R1_S10 D2_R2_S11 D2_R3_S12 D3_R1_S10 D3_R2_S11 D3_R3_S12", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "LEF1",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "scrt1": {
+        "prefix": "SCRT1",
+        "reps": "D1_R1_S16 D1_R2_S17 D1_R3_S18 D2_R1_S16 D2_R2_S17 D2_R3_S18 D3_R1_S16 D3_R2_S17 D3_R3_S18", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "SCRT1",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "tcf7l2": {
+        "prefix": "TCF7L2",
+        "reps": "D1_R1_S13 D1_R2_S14 D1_R3_S15 D2_R1_S13 D2_R2_S14 D2_R3_S15 D3_R1_S13 D3_R2_S14 D3_R3_S15", 
+        "readpairs": "R1_001", 
+        "fastqsuffix": "fastq.gz",
+        "shortform": "TCF7L2",
+        "day": "day1 day1 day1 day2 day2 day2 day3 day3 day3"
+    },
+    "genome": {
+        "fasta": "/data5/deepro/genomes/hg38/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta",
+        "gtf": "/data5/deepro/genomes/hg38/gencode.v42.chr_patch_hapl_scaff.annotation.gtf"
+    }
+}
