@@ -75,12 +75,12 @@ def get_file_from_encode(acc, storage_dir, filebase):
 def create_expression_table_helper(counts_file, gtf_file, store_file):
     expr_df = pd.read_csv(counts_file, sep="\t", engine="python", skipfooter=5).set_index(["gene_id", "gene_name"])
     expr_df["mean_raw_counts"] = expr_df.mean(axis=1)
-    gtf_df = pd.read_csv(gtf_file, sep="\t", header=None, names=["chrm", "start", "end", "gene_name", "gene_id", "strand"]).set_index(["gene_id", "gene_name"])
+    gtf_df = pd.read_csv(gtf_file, sep="\t", header=None, names=["chrm", "start", "end", "gene_id", "gene_name", "strand"]).set_index(["gene_id", "gene_name"])
     expr_df = expr_df.merge(gtf_df, left_index=True, right_index=True)
     assert len(expr_df) == len(gtf_df)
     expr_df["length"] = expr_df.end - expr_df.start
     expr_df["expression"] = (expr_df.mean_raw_counts*1e3)/expr_df.length
     expr_df["expression"] = (expr_df["expression"]*1e6)/expr_df["expression"].sum()
     expr_df = expr_df.reset_index()
-    expr_df.loc[:, ["gene_name", "expression"]].to_csv(store_file, sep="\t", index=False, header=False)
+    expr_df.loc[:, ["gene_id", "expression"]].to_csv(store_file, sep="\t", index=False, header=False)
     return

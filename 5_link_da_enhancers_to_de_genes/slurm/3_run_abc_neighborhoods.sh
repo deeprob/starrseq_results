@@ -7,8 +7,8 @@
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=20G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src
-#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/2_out_%a.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/2_err_%a.log
+#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/3_out_%a.log
+#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/3_err_%a.log
 #SBATCH --exclude ramona,durga
 #SBATCH --array 1
 #SBATCH --spread-job
