@@ -1,0 +1,3 @@
+ENCFF588KSR /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/histone/h3k27ac h3k27ac_r1.bam
+ENCFF016LAV /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/histone/h3k27ac h3k27ac_r2.bam
+ENCFF120XFB /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/open_chrom/dnaseseq dnase.bam

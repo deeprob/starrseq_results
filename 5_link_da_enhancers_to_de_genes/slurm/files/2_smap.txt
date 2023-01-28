@@ -1,0 +1,1 @@
+/data5/deepro/starrseq/papers/results/4_compare_expression_ko_vs_wt/data/results/count CC /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/genome_annot/parsed_gtf.tsv /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/expression

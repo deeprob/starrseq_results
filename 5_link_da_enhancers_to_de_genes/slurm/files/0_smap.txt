@@ -1,0 +1,1 @@
+/data5/deepro/genomes/hg38/gencode.v42.chr_patch_hapl_scaff.annotation.gtf /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data
