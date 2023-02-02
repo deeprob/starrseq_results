@@ -1,0 +1,2 @@
+/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter.hic /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/normfiles
+ 
