@@ -7,8 +7,8 @@
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=200G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes
-#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/8_out.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/8_err.log
+#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/7_out.log
+#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/7_err.log
 #SBATCH --nodelist sarah
 
 # >>> conda initialize >>>
@@ -52,6 +52,6 @@ which java
 
 
 # constructing hic matrix with KR normalization for 5000bp resolution as required by ABC input
-java -Ddevelopment=false -Djava.awt.headless=true -jar ${juicer_tools_path} pre -s ${stats_file} -g ${graph_file} -f ${restriction_sites} -r 5000 -v ${paired_contact_file} -t ${tmp_dir} ${out_hic_file} ${chrom_sizes_file}
+java -Ddevelopment=false -Djava.awt.headless=true -jar ${juicer_tools_path} pre -s ${stats_file} -g ${graph_file} -f ${restriction_sites} -r 5000 -v -t ${tmp_dir} -q 1 ${paired_contact_file} ${out_hic_file} ${chrom_sizes_file}
 
 echo `date` ending job

@@ -7,8 +7,8 @@
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=32G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes
-#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/7_out.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/7_err.log
+#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/6_out.log 
+#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/6_err.log
 #SBATCH --nodelist sarah
 
 # >>> conda initialize >>>
