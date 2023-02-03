@@ -30,13 +30,13 @@ conda activate starrseq
 
 echo `date` starting job on $HOSTNAME
 
-juicer_tools_path="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/Juicer/scripts/common/juicer_tools.jar"
+juicer_tools_path="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/juicer_1_6/scripts/common/juicer_tools.jar"
 stats_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter.txt"
 graph_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter_hists.m"
 restriction_sites="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/restriction_sites/hg38_MboI_mod.txt"
 paired_contact_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/merged_nodups.txt"
 out_hic_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter.hic"
-chrom_sizes_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/Juicer/references/GRCh38.chrom.sizes.simple.sorted"
+chrom_sizes_file="/data5/deepro/genomes/hg38/GRCh38.chrom.sizes.simple.sorted"
 tmp_dir="./HIC_tmp"
 
 ################################################

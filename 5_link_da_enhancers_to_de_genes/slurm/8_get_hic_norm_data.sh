@@ -33,7 +33,7 @@ echo `date` starting job on $HOSTNAME
 
 LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/files/8_smap.txt)
 
-juicer_tools_path="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/Juicer/scripts/common/juicer_tools.jar"
+juicer_tools_path="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/juicer_1_6/scripts/common/juicer_tools.jar"
 
 ################################################
 #### setup environmental variables for java ####
