@@ -7,8 +7,8 @@
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=200G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes
-#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/7_out.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/7_err.log
+#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/8_out.log
+#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes//slurm/logs/8_err.log
 #SBATCH --nodelist sarah
 
 # >>> conda initialize >>>
@@ -31,11 +31,7 @@ conda activate starrseq
 echo `date` starting job on $HOSTNAME
 
 juicer_tools_path="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/juicer_1_6/scripts/common/juicer_tools.jar"
-stats_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter.txt"
-graph_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter_hists.m"
-paired_contact_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/merged_nodups.txt"
 out_hic_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter.hic"
-chrom_sizes_file="/data5/deepro/genomes/hg38/GRCh38.chrom.sizes.simple.sorted"
 tmp_dir="./HIC_tmp"
 
 ################################################
@@ -50,7 +46,7 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=/data5/deepro/tmp -Djava.util.p
 which java
 
 
-# constructing hic matrix with Juicer pre without normalization
-java -Ddevelopment=false -Djava.awt.headless=true -jar ${juicer_tools_path} pre -s ${stats_file} -g ${graph_file} -n -t ${tmp_dir} -q 1 ${paired_contact_file} ${out_hic_file} ${chrom_sizes_file}
+# constructing hic matrix with KR normalization as required by ABC input
+java -Ddevelopment=false -Djava.awt.headless=true -jar ${juicer_tools_path} addNorm -F -w 5000 ${out_hic_file}
 
 echo `date` ending job
