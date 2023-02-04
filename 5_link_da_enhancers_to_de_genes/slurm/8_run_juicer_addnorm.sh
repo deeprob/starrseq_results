@@ -32,13 +32,11 @@ echo `date` starting job on $HOSTNAME
 
 juicer_tools_path="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/juicer_1_6/scripts/common/juicer_tools.jar"
 out_hic_file="/data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/data/hic/hek293t/aligned/inter.hic"
-tmp_dir="./HIC_tmp"
 
 ################################################
 #### setup environmental variables for java ####
 ################################################
 
-mkdir -p ${tmp_dir}
 HOME="/data5/deepro/tmp"
 export HOME
 # export IBM_JAVA_OPTIONS="-Xmx49152m -Xgcthreads1""
