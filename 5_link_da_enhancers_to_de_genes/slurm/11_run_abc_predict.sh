@@ -7,10 +7,10 @@
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=200G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src
-#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/10_out_%a.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/10_err_%a.log
+#SBATCH -o /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/11_out_%a.log
+#SBATCH -e /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/logs/11_err_%a.log
 #SBATCH --exclude ramona,durga
-#SBATCH --array 1-2
+#SBATCH --array 3-4
 #SBATCH --spread-job
 
 # >>> conda initialize >>>
@@ -32,7 +32,7 @@ conda activate final-abc-env
 
 echo `date` starting job on $HOSTNAME
 
-LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/files/10_smap.txt)
+LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/slurm/files/11_smap.txt)
 
 echo $LINE
 python /data5/deepro/starrseq/papers/results/5_link_da_enhancers_to_de_genes/src/ABC-Enhancer-Gene-Prediction/src/predict.py $LINE
