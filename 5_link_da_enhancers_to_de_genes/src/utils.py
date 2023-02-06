@@ -1,6 +1,8 @@
 import pandas as pd
 import requests
 import os
+import pysam
+
 
 #############
 # parse gtf #
@@ -83,4 +85,31 @@ def create_expression_table_helper(counts_file, gtf_file, store_file):
     expr_df["expression"] = (expr_df["expression"]*1e6)/expr_df["expression"].sum()
     expr_df = expr_df.reset_index()
     expr_df.loc[:, ["gene_id", "expression"]].to_csv(store_file, sep="\t", index=False, header=False)
+    return
+
+
+##################
+# activity table #
+##################
+
+def get_num_reads_bam_pair1(bam_file):
+    # val = pysam.view("-c", bam_file)
+    # read mapped in proper pair and first in pair :: https://broadinstitute.github.io/picard/explain-flags.html
+    val = pysam.view("-f", "66", "-c", bam_file)
+    return int(val.strip())
+
+def get_rpm_normalized_depth_df(depth_file, bam_file):
+    depth_df = pd.read_csv(depth_file, sep="\t", header=None)
+    depth_df = depth_df.iloc[:, [0, 1, 2, -4]]
+    depth_df.columns = ["chr", "start", "end", "reads"]
+    bam_reads_pair = get_num_reads_bam_pair1(bam_file)
+    depth_df["RPM"] = (depth_df.reads*1e6)/bam_reads_pair
+    depth_df["activity_base"] = depth_df["RPM"]
+    return depth_df
+
+def create_activity_table_helper(depth_file, bam_file, enhancer_file, store_file):
+    depth_df = get_rpm_normalized_depth_df(depth_file, bam_file)
+    enhancer_df = pd.read_csv(enhancer_file, sep="\t", header=0, usecols=['chr','start','end','name','class'])
+    activity_df = depth_df.merge(enhancer_df, left_on=["chr", "start", "end"], right_on=["chr", "start", "end"]) 
+    activity_df.to_csv(store_file, sep="\t", index=False, header=True)
     return
