@@ -10,7 +10,7 @@
 #SBATCH -o /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/slurm/logs/1_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/3_ml_classification_fragment_category/slurm/logs/1_err_%a.log
 #SBATCH --exclude ramona,durga
-#SBATCH --array 1-20
+#SBATCH --array 21-23
 #SBATCH --spread-job
 
 # >>> conda initialize >>>
