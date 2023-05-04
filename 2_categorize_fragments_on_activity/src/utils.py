@@ -136,6 +136,8 @@ def get_meta_activity_map(meta_file, all_lib_names, fragment_depth_dir, filtered
 ########################
 
 def save_file_in_homer_format(df, libn, savefile, control=False):
+    if len(df)==0:
+        return
     # drop duplicates
     df = df.fillna("NA").drop_duplicates(keep="first")
     # split the merged coordinates to bed format
@@ -173,16 +175,24 @@ def save_diff_act(meta_df, libn, store_dir):
     responsive = pd.concat([induced, repressed], axis=0)
     # non-responsive fragments :: anything that is not responsive 
     nonresponsive = meta_df.loc[~((meta_df[f"{libn}_log2FoldChange"]>0)&(meta_df[f"{libn}_padj"]<0.01)|(meta_df[f"{libn}_log2FoldChange"]<0)&(meta_df[f"{libn}_padj"]<0.01))]
-    
+    # gained fragments :: not a peak in CC; peak in lib; log2FoldChange>0; padj<0.01 
+    gained = meta_df.loc[(meta_df["CC_peak"]==0)&(meta_df[f"{libn}_peak"]==1)&(meta_df[f"{libn}_log2FoldChange"]>0)&(meta_df[f"{libn}_padj"]<0.01)]
+    # lost fragments :: peak in CC; not a peak in lib; log2FoldChange<0; padj<0.01
+    lost = meta_df.loc[(meta_df["CC_peak"]==1)&(meta_df[f"{libn}_peak"]==0)&(meta_df[f"{libn}_log2FoldChange"]<0)&(meta_df[f"{libn}_padj"]<0.01)]
+
     assert len(meta_df) == sum(list(map(len, [induced, repressed, nonresponsive])))
 
     induced_save_file = os.path.join(store_dir, libn, "induced.bed")
     repressed_save_file = os.path.join(store_dir, libn, "repressed.bed")
+    gained_save_file = os.path.join(store_dir, libn, "gained.bed")
+    lost_save_file = os.path.join(store_dir, libn, "lost.bed")
     responsive_save_file = os.path.join(store_dir, libn, "responsive.bed")
     nonresponsive_save_file = os.path.join(store_dir, libn, "nonresponsive.bed")
 
     save_file_in_homer_format(induced, libn, induced_save_file)
     save_file_in_homer_format(repressed, libn, repressed_save_file)
+    save_file_in_homer_format(gained, libn, gained_save_file)
+    save_file_in_homer_format(lost, libn, lost_save_file)
     save_file_in_homer_format(responsive, libn, responsive_save_file)
     save_file_in_homer_format(nonresponsive, libn, nonresponsive_save_file)
     return
@@ -190,7 +200,7 @@ def save_diff_act(meta_df, libn, store_dir):
 
 def save_always_active_inactive(meta_df, libn, all_lib_names, store_dir):
     always_active_expr = " & ".join([f"(`{ln}_peak` == 1)" for ln in all_lib_names])
-    always_inactive_expr = " & ".join([f"(`{ln}` < 0.2) & (`{ln}` > -0.2)" for ln in all_lib_names])
+    always_inactive_expr = " & ".join([f"(`{ln}` < -1)" for ln in all_lib_names])
     always_active = meta_df.query(always_active_expr)
     always_inactive = meta_df.query(always_inactive_expr)
 

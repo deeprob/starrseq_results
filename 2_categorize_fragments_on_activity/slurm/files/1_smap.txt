@@ -1,1 +1,1 @@
-/data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/data/meta_activity_map.csv /data5/deepro/starrseq/papers/results/1_categorize_fragments_on_activity/data -l CC ATF2 CTCF FOXA1 LEF1 SCRT1 TCF7L2 16P12_1
+/data5/deepro/starrseq/papers/results/2_categorize_fragments_on_activity/data/meta_activity_map.csv /data5/deepro/starrseq/papers/results/2_categorize_fragments_on_activity/data -l CC ATF2 CTCF FOXA1 LEF1 SCRT1 TCF7L2 16P12_1

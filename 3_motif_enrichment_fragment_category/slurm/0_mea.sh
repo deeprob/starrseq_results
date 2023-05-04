@@ -6,9 +6,9 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=20G
-#SBATCH --chdir /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/src
-#SBATCH -o /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/slurm/logs/0_out_%a.log
-#SBATCH -e /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/slurm/logs/0_err_%a.log
+#SBATCH --chdir /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/src
+#SBATCH -o /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_out_%a.log
+#SBATCH -e /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_err_%a.log
 #SBATCH --exclude ramona,durga
 #SBATCH --array 21
 #SBATCH --spread-job
@@ -32,9 +32,9 @@ conda activate starrseq_mea
 
 echo `date` starting job on $HOSTNAME
 
-LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/slurm/files/0_smap.txt)
+LINE=$(sed -n "$SLURM_ARRAY_TASK_ID"p /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/files/0_smap.txt)
 
 echo $LINE
-python /data5/deepro/starrseq/papers/results/2_motif_enrichment_fragment_category/src/0_mea.py $LINE
+python /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/src/0_mea.py $LINE
 
 echo `date` ending job
