@@ -41,9 +41,9 @@ if __name__ == "__main__":
     nearest_activity_df = create_activity_expression_df(meta_activity_df, meta_expression_df, "nearest_gene", libraries[1:], "log2FoldChange", "log2FoldChange")
     abc_activity_df["per_gene_corr"] = abc_activity_df.apply(get_per_gene_corr, args=(libraries[1:],), axis=1)
     nearest_activity_df["per_gene_corr"] = nearest_activity_df.apply(get_per_gene_corr, args=(libraries[1:],), axis=1)
-    abc_activity_df.sort_values("per_gene_corr", ascending=False).to_csv(abc_save_file)
-    nearest_activity_df.sort_values("per_gene_corr", ascending=False).to_csv(nearest_save_file)
+    abc_activity_df.sort_values("per_gene_corr", ascending=False).to_csv(abc_save_file, index=False)
+    nearest_activity_df.sort_values("per_gene_corr", ascending=False).to_csv(nearest_save_file, index=False)
 
     
     meta_activity_df = pd.concat([meta_activity_df, meta_activity_df.apply(check_sde,  args=(meta_expression_df, libraries[1:]), axis=1)], axis=1)
-    meta_activity_df.to_csv(sde_save_file)
+    meta_activity_df.to_csv(sde_save_file, index=False)
