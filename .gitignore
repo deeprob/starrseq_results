@@ -5,6 +5,7 @@
 **/data/
 **/logs
 scratch.ipynb
+/4_ml_classification_fragment_category/src/biopeaker
 /6_link_da_enhancers_to_de_genes/src/ABC-Enhancer-Gene-Prediction
 /6_link_da_enhancers_to_de_genes/src/Juicer
 /6_link_da_enhancers_to_de_genes/src/juicer_1_6
