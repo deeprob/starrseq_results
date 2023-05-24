@@ -10,7 +10,7 @@
 #SBATCH -o /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/slurm/logs/3_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/slurm/logs/3_err_%a.log
 #SBATCH --exclude laila,ramona
-#SBATCH --array 17
+#SBATCH --array 1-23
 
 
 source /opt/anaconda/bin/activate /data5/deepro/miniconda3/envs/starrseq
