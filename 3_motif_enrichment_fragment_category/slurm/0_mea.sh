@@ -9,9 +9,8 @@
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/src
 #SBATCH -o /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_err_%a.log
-#SBATCH --exclude ramona,durga
-#SBATCH --array 21
-#SBATCH --spread-job
+#SBATCH --exclude ramona,durga,laila
+#SBATCH --array 1-60%4
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
