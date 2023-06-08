@@ -1,26 +1,26 @@
-CC resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-ATF2 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-CTCF resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-FOXA1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-LEF1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-SCRT1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-TCF7L2 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-16P12_1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
-ATF2 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-CTCF resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-FOXA1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-LEF1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-SCRT1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-TCF7L2 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-16P12_1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data responsive nonresponsive
-ATF2 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-CTCF resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-FOXA1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-LEF1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-SCRT1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-TCF7L2 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-16P12_1 resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data induced repressed
-CC resnet /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data active inactive
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CC/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CC/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/ATF2/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/ATF2/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CTCF/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CTCF/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/FOXA1/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/FOXA1/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/LEF1/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/LEF1/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/SCRT1/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/SCRT1/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/TCF7L2/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/TCF7L2/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/16P12_1/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/16P12_1/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/ATF2/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/ATF2/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CTCF/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CTCF/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/FOXA1/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/FOXA1/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/LEF1/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/LEF1/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/SCRT1/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/SCRT1/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/TCF7L2/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/TCF7L2/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/16P12_1/responsive_vs_nonresponsive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/16P12_1/responsive_vs_nonresponsive/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/ATF2/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/ATF2/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CTCF/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CTCF/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/FOXA1/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/FOXA1/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/LEF1/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/LEF1/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/SCRT1/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/SCRT1/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/TCF7L2/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/TCF7L2/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/16P12_1/induced_vs_repressed/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/16P12_1/induced_vs_repressed/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CC/active_vs_inactive/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data/CC/active_vs_inactive/non_linear/scores.csv
 CC linear /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
 ATF2 linear /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
 CTCF linear /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/data peaks notpeaks
