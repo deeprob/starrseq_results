@@ -5,12 +5,12 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=400:0:0
-#SBATCH --mem-per-cpu=100G
+#SBATCH --mem-per-cpu=1000G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/7_cross_library_prediction/src
 #SBATCH -o /data5/deepro/starrseq/papers/results/7_cross_library_prediction/slurm/logs/0_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/7_cross_library_prediction/slurm/logs/0_err_%a.log
-#SBATCH --exclude laila,ramona
-#SBATCH --array 1
+#SBATCH --exclude laila,ramona,durga
+#SBATCH --array 2-10%2
 
 
 source /opt/anaconda/bin/activate /data6/deepro/miniconda3/envs/dlenv
