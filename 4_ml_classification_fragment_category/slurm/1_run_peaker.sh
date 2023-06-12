@@ -3,7 +3,7 @@
 #SBATCH --partition=girirajan
 #SBATCH --job-name=starr_dl
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=2
 #SBATCH --time=400:0:0
 #SBATCH --mem-per-cpu=5G
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/src
@@ -11,7 +11,7 @@
 #SBATCH -e /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/slurm/logs/1_err_%a.log
 #SBATCH --nodelist laila
 #SBATCH --gpus=1
-#SBATCH --array 1-46%4
+#SBATCH --array 1-15%2
 
 
 source /opt/anaconda/bin/activate /data6/deepro/miniconda3/envs/dlenv

@@ -1,1 +1,3 @@
 /data5/deepro/starrseq/papers/results/7_cross_library_prediction/data/pilot/peaks_vs_notpeaks/model_break_test/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/7_cross_library_prediction/data/pilot/peaks_vs_notpeaks/model_break_test/scores.csv
+/data5/deepro/starrseq/papers/results/7_cross_library_prediction/data/ATF2/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/7_cross_library_prediction/data/ATF2/peaks_vs_notpeaks/non_linear/scores.csv
+/data5/deepro/starrseq/papers/results/7_cross_library_prediction/data/FOXA1/peaks_vs_notpeaks/non_linear/resnet_mlp.csv.gz /data5/deepro/starrseq/papers/results/7_cross_library_prediction/data/FOXA1/peaks_vs_notpeaks/non_linear/scores.csv
