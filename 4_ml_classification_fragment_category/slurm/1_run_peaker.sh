@@ -11,7 +11,7 @@
 #SBATCH -e /data5/deepro/starrseq/papers/results/4_ml_classification_fragment_category/slurm/logs/1_err_%a.log
 #SBATCH --nodelist laila
 #SBATCH --gpus=1
-#SBATCH --array 1-15%2
+#SBATCH --array 16-23%2
 
 
 source /opt/anaconda/bin/activate /data6/deepro/miniconda3/envs/dlenv
