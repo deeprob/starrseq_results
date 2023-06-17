@@ -37,3 +37,7 @@ export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=/data5/deepro/tmp -Djava.util.p
 ```bash
 conda create -n hic_pre -c conda-forge -c bioconda openjdk coreutils bwa
 ```
+
+## Get PPI data from BioGRID
+Downloaded from https://downloads.thebiogrid.org/File/BioGRID/Release-Archive/BIOGRID-4.4.222/BIOGRID-ALL-4.4.222.tab3.zip
+
