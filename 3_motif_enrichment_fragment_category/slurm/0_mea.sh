@@ -10,7 +10,7 @@
 #SBATCH -o /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_err_%a.log
 #SBATCH --exclude ramona,durga,laila
-#SBATCH --array 21
+#SBATCH --array 61-62
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
