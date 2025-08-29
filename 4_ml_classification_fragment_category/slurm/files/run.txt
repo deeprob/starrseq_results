@@ -1,0 +1,8 @@
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/CC/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/CC/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/ATF2/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/ATF2/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/CTCF/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/CTCF/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/FOXA1/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/FOXA1/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/LEF1/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/LEF1/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/SCRT1/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/SCRT1/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/TCF7L2/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/TCF7L2/linear
+/data7/deepro/starrseq/4_ml_classification_fragment_category/data/16P12_1/resnet_1000.h5 /data7/deepro/starrseq/4_ml_classification_fragment_category/data/16P12_1/linear

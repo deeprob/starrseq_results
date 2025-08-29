@@ -19,10 +19,13 @@ def get_per_gene_corr(ser, ko_lines):
 
 def check_sde(ser, meta_exp, libs):
     coord = ser.chrom_coord
-    genes = np.array(ser.nearest_gene.split("|"))
-    sdes = meta_exp.loc[meta_exp.gene_id.isin(genes), [f"{lib}_padj" for lib in libs]].values
+    nearest_genes = set(ser.nearest_gene.split("|")) if not pd.isnull(ser.nearest_gene) else set()
+    abc_genes = set(ser.abc_gene.split("|")) if not pd.isnull(ser.abc_gene) else set()
+    genes = nearest_genes.union(abc_genes)
+    genes = np.array(list(genes))
+    sdes = meta_exp.loc[meta_exp.gene_id.isin(set(genes)), [f"{lib}_padj" for lib in libs]].values
     genes = genes.reshape(len(genes),1).repeat(len(libs), 1)
-    sde_genes = np.where(sdes<0.01, genes, "")
+    sde_genes = np.where(sdes<0.05, genes, "")
     data_dict = dict()
     for i,row in enumerate(sde_genes.T):
         data_dict[f"{libs[i]}_sde"] = "|".join(row).strip("|")
@@ -35,7 +38,7 @@ if __name__ == "__main__":
     libraries = ["CC", "ATF2", "CTCF", "FOXA1", "LEF1", "SCRT1", "TCF7L2", "16P12_1"]
     abc_save_file = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/activity_vs_expression_corr/abc_da_de_table.csv"
     nearest_save_file = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/activity_vs_expression_corr/nearest_da_de_table.csv"
-    sde_save_file = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/activity_vs_expression_corr/nearest_da_sde_table.csv"
+    sde_save_file = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/activity_vs_expression_corr/da_sde_table.csv"
 
     abc_activity_df = create_activity_expression_df(meta_activity_df, meta_expression_df, "abc_gene", libraries)
     nearest_activity_df = create_activity_expression_df(meta_activity_df, meta_expression_df, "nearest_gene", libraries)
@@ -45,5 +48,5 @@ if __name__ == "__main__":
     nearest_activity_df.sort_values("per_gene_corr", ascending=False).to_csv(nearest_save_file, index=False)
 
     
-    # meta_activity_df = pd.concat([meta_activity_df, meta_activity_df.apply(check_sde,  args=(meta_expression_df, libraries[1:]), axis=1)], axis=1)
-    # meta_activity_df.to_csv(sde_save_file, index=False)
+    meta_activity_df = pd.concat([meta_activity_df, meta_activity_df.apply(check_sde,  args=(meta_expression_df, libraries[1:]), axis=1)], axis=1)
+    meta_activity_df.to_csv(sde_save_file, index=False)

@@ -24,6 +24,8 @@ def add_info(meta_activity_map, abc_file, nearest_file, save_file):
 
     # parse nearest gene file
     nearest_df = pd.read_csv(nearest_file, sep="\t", header=None)
+    # feature must be within 5000 bp
+    nearest_df = nearest_df.loc[nearest_df[9]<=5000]
     # rename columns
     nearest_df.columns = ["chr1", "start1", "end1", "chr2", "start2", "end2", "nearest_target", "nearest_gene_symbol", "strand", "distance"]
     # add chrom coord

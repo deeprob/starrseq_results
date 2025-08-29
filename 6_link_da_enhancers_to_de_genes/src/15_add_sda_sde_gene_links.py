@@ -38,8 +38,8 @@ def parse_deseqres_for_volcano_plot(df, lib):
     # create neglog10 val
     df["neglog10padj"] = -np.log10(df.padj)
     # create hue columns
-    lfc_thresh = 0.5
-    pv_thresh = 0.01
+    lfc_thresh = 0.25
+    pv_thresh = 0.05
     df["hue"] = "Not Significant"
     df.loc[(df.log2FoldChange>lfc_thresh)&(df.padj<pv_thresh), "hue"] = "Significant Up"
     df.loc[(df.log2FoldChange<-lfc_thresh)&(df.padj<pv_thresh), "hue"] = "Significant Down"
@@ -101,11 +101,15 @@ def add_library_info(meta_activity_df, meta_expression_df, lib, save_dir):
             tg_df = add_expression_info(fragment_df, volcano_df, lib)
             save_file = os.path.join(save_dir, f"{fragment_name}_merged.csv")
             tg_df.to_csv(save_file, index=False)
+            # agree directions
+            tg_df = tg_df.loc[np.sign(tg_df[f"{lib}_log2FoldChange"]) == np.sign(tg_df["log2FoldChange"])]
+            save_file = os.path.join(save_dir, f"{fragment_name}_merged_consistent.csv")
+            tg_df.to_csv(save_file, index=False)
     return
 
 
 if __name__ == "__main__":
-    meta_activity_file = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/activity_vs_expression_corr/nearest_da_sde_table.csv"
+    meta_activity_file = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/activity_vs_expression_corr/da_sde_table.csv"
     meta_expression_file = "/data5/deepro/starrseq/papers/results/5_compare_expression_ko_vs_wt/data/meta_exp.csv"
     save_dir = "/data5/deepro/starrseq/papers/results/6_link_da_enhancers_to_de_genes/data/da_enhancers_to_de_genes_links"
     libs = ["ATF2", "CTCF", "FOXA1", "LEF1", "SCRT1", "TCF7L2", "16P12_1"]
