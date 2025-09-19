@@ -9,25 +9,25 @@
 #SBATCH --chdir /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/src
 #SBATCH -o /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_out_%a.log
 #SBATCH -e /data5/deepro/starrseq/papers/results/3_motif_enrichment_fragment_category/slurm/logs/0_err_%a.log
-#SBATCH --exclude ramona,durga,laila
-#SBATCH --array 177-200
+#SBATCH --exclude ramona
+#SBATCH --array 1-30
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/data5/deepro/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/data5/deepro/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/data5/deepro/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/data5/deepro/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/data5/deepro/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/data5/deepro/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/data5/deepro/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/data5/deepro/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
 
-conda activate starrseq_mea
+source /opt/anaconda/bin/activate /data5/deepro/miniconda3/envs/starrseq_mea
 
 echo `date` starting job on $HOSTNAME
 

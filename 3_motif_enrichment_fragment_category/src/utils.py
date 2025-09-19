@@ -36,14 +36,14 @@ def create_args(meta_file, lib_name):
 # homer mea #
 #############
 
-def run_mea_homer(peak_file, reference_genome, background_region, output_dir, threads):
+def run_mea_homer(peak_file, reference_genome, background_region, motif_file, output_dir, threads):
     os.makedirs(output_dir, exist_ok=True)
     logfile = os.path.join(output_dir, "homer.log")
 
     lf = open(logfile, "w")
     subprocess.run([
         "bash", f"{CURRENT_DIR_PATH}/shell_scripts/0_run_mea_homer.sh", 
-        peak_file, reference_genome, background_region, output_dir, f"{threads}"
+        peak_file, reference_genome, background_region, output_dir, f"{threads}", motif_file
         ], stdout=lf, stderr=lf, check=True)
     lf.close()
     return logfile
@@ -102,7 +102,7 @@ def run_mea(
     ):
 
     if method == "homer":
-        run_mea_homer(lib_peak_file, genome, background_region_filepath, outdir, threads)
+        run_mea_homer(lib_peak_file, genome, background_region_filepath, motif_file, outdir, threads)
     else:
         # assuming alternate method is meme
         run_mea_meme(lib_peak_file, genome, background_region_filepath, motif_file, outdir)
