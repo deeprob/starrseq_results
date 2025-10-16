@@ -184,6 +184,9 @@ def get_diff_active_fragments_deseq(
     contrast = ",".join(["condition", lib_short, cc_short])
     print(f"Regions with logFC > 0 are induced in {lib_short}.")
     # run deseq
+    # since the input library was the same for all output libraries, 
+    # we can assume the the number of input fragments is the same,
+    # hence normalization with input is not necessary
     da_with_deseq(deseq_in_file, design_mat_file, deseq_out, contrast)
     return
 
